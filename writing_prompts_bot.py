@@ -61,7 +61,7 @@ def run_bot(reddit, comments_replied_to) :
             #
 
             reddit.subreddit('Layne_Staley').submit(story_title,
-                                                   '(' + prompt_title + ')[' + url + ']\n\n' + story)
+                                                   '[' + prompt_title + '](' + url + ')\n\n' + story)
 
 
             # Add comment ID to replied to list

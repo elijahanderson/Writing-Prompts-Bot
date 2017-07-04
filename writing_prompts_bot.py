@@ -4,7 +4,7 @@
 #
 # By Eli Anderson
 #
-# Last edited July 02, 2017
+# Last edited July 03, 2017
 #
 # Once you get this code, you'll need to do some editing (nothing too complicated)
 #
@@ -24,6 +24,9 @@ import praw
 # time module is used so the bot won't go crazy
 
 import time
+
+# This script will create a text doc in the folder to keep track of the stories the bot already posted, just fyi
+
 import os
 
 
@@ -41,7 +44,8 @@ def run_bot(reddit, comments_replied_to4) :
 
     # Loop through the comment history of /u/Layne-Staley
     # I set the limit to be 25 comments so the bot won't automatically post stories that you've already posted yourself.
-    # However I don't know how far back your last posted story is, so you might have to edit the limit
+    # However I don't know how far back your last posted story is, so you might have to edit the limit yourself
+
     print('Looping through comments...')
 
     for comment in reddit.redditor('Layne-Staley').comments.new(limit=25):
@@ -57,6 +61,8 @@ def run_bot(reddit, comments_replied_to4) :
             url = 'https://reddit.com' + comment.permalink(fast=False)
 
             # Copy the title of the prompt and title of story
+            # 7 is the length of 'Title: ' in case you're wondering why that's there
+
             title_index = 7 + comment.body.index('Title:')
             story_beginning_index = comment.body.index('\n\n')
             story_title = comment.body[title_index : story_beginning_index]
@@ -71,10 +77,10 @@ def run_bot(reddit, comments_replied_to4) :
             #       - Title of post is specified by Layne
             #       - First line of post is hyperlink to /r/WritingPrompts post (Title of post is the link)
             #
-            
+
             print('Submitting post...')
 
-            reddit.subreddit('test').submit(story_title,
+            reddit.subreddit('Layne_Staley').submit(story_title,
                                             '[' + prompt_title + '](' + url + ')\n\n' + story)
 
             print('Post submitted!')
